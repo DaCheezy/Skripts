@@ -2,7 +2,7 @@ options:
     Main-color: <##bcffb4> #u can make this any color including hex color codes eg ---> <##123456>
 
 every 2 minutes:
-	broadcast "{@Main-color}&lClearLagg &8| &fRemoving entities in 5 seconds"
+	send "{@Main-color}&lClearLagg &8| &fRemoving entities in 5 seconds" to all players
 	wait 5 seconds
 	send "{@Main-color}&lClearLagg &8| &fSuccesfully removed {@Main-color}%size of dropped items% &fitems" to all players
 	delete dropped items
