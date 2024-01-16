@@ -1,0 +1,9 @@
+command fakeop <player>:
+   permission: fake.op
+   trigger:
+      send "&7&o[%player%: Made %arg-1% a server operator]" to all players
+       
+command /fakedeop [<offlineplayer>]:
+   permission: fake.deop
+   trigger:
+      semd "&7[SERVER]: %arg-1%" is no longer a server operator
