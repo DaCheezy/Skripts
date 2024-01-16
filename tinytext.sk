@@ -1,0 +1,37 @@
+#---TinyText Generator---#
+
+
+function TinyText(s: text) :: text: 
+	replace all "a" or "A" in {_s} with "ᴀ"
+	replace all "b" or "B" in {_s} with "ʙ"
+	replace all "c" or "C" in {_s} with "ᴄ"
+	replace all "d" or "D" in {_s} with "ᴅ"
+	replace all "e" or "E" in {_s} with "ᴇ"
+	replace all "f" or "F" in {_s} with "ғ"
+	replace all "g" or "G" in {_s} with "ɢ"
+	replace all "h" or "H" in {_s} with "ʜ"
+	replace all "i" or "I" in {_s} with "ɪ"
+	replace all "j" or "J" in {_s} with "ᴊ"
+	replace all "k" or "K" in {_s} with "ᴋ"
+	replace all "l" or "L" in {_s} with "ʟ"
+	replace all "m" or "M" in {_s} with "ᴍ"
+	replace all "n" or "N" in {_s} with "ɴ"
+	replace all "o" or "O" in {_s} with "ᴏ"
+	replace all "p" or "P" in {_s} with "ᴘ"
+	replace all "q" or "Q" in {_s} with "ǫ"
+	replace all "r" or "R" in {_s} with "ʀ"
+	replace all "s" or "S" in {_s} with "s"
+	replace all "t" or "T" in {_s} with "ᴛ"
+	replace all "u" or "U" in {_s} with "ᴜ"
+	replace all "v" or "V" in {_s} with "ᴠ"
+	replace all "w" or "W" in {_s} with "ᴡ"
+	replace all "x" or "X" in {_s} with "x"
+	replace all "y" or "Y" in {_s} with "ʏ"
+	replace all "z" or "Z" in {_s} with "ᴢ"
+	return "%{_s}%" 
+
+#---Example---#
+
+command tinytext <text>:
+    trigger:
+        send "%TinyText(arg)%" 
