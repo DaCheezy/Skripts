@@ -1,0 +1,502 @@
+options:
+
+
+
+#Use /troll in-game for the troll menu.
+
+#Required addons: Skript-GUI, Tablisknu, ProtocolLIB
+
+#Version: 3
+
+
+	#Set this to the permission that allows people to use /troll. By default this is *.
+	TrollPermission: troll.use
+	
+	#Set this to the permission message you want the skript to send to people who dont have permission to use the command.
+	PermissionMessage: &cNo Permission!
+	
+	#Set this to the speed you want players to rotate at for the 'rotate' troll. Lower number is faster. Default is 20.
+	RotateTrollSpeed: 20
+
+
+#==============================================================================================
+#END OF SIMPLE TROLLING CONFIG, DO NOT EDIT CODE BELOW
+#==============================================================================================
+
+
+command /troll [<player>]:
+	usage: &c/troll <target>
+	permission: {@TrollPermission}
+	permission message: {@PermissionMessage}
+	trigger:
+		if arg-1 is set:
+			set {_user} to arg-1
+			create a gui with virtual chest inventory with 5 rows named "&eTroll %arg 1%":
+				make gui 0, 1, 2, 3, 5, 6, 7, 8, 36, 37, 38, 39, 40, 41, 42, 43 and 44 with gray stained glass pane named " "
+				make gui 4 with arg-1's skull named "&eTrolling %arg 1%&e!"
+				make gui 9 with cooked beef named "&3Starve" with lore "&7Make target starve!":
+					close player's inventory
+					trollPlayer({_user}, player, "starve")
+				make gui 10 with chest named "&3Invsee" with lore "&7See inside target's inventory!":
+					close player's inventory
+					trollPlayer({_user}, player, "invsee")
+				make gui 11 with wooden shovel named "&3Bury" with lore "&7Bury target under the ground!":
+					close player's inventory
+					trollPlayer({_user}, player, "bury")
+				make gui 12 with compass named "&3Teleport" with lore "&7Make target teleport around randomly!":
+					close player's inventory
+					trollPlayer({_user}, player, "tp")
+				make gui 13 with oak sign named "&3Spam" with lore "&7Spam target's chat!":
+					close player's inventory
+					trollPlayer({_user}, player, "spam")
+				make gui 14 with flint and steel named "&3Ignite" with lore "&7Set target on fire!":
+					close player's inventory
+					trollPlayer({_user}, player, "ignite")
+				make gui 15 with wooden sword named "&3Damage" with lore "&7Damage target without hitting them!":
+					close player's inventory
+					trollPlayer({_user}, player, "hurt")
+				make gui 16 with white stained glass named "&3Cage" with lore "&7Trap target in a cage!":
+					close player's inventory
+					trollPlayer({_user}, player, "trap")
+				make gui 17 with creeper spawn egg named "&3Creeper" with lore "&7Spawn a creeper behind target!":
+					close player's inventory
+					trollPlayer({_user}, player, "creeper")
+				make gui 18 with arrow named "&3Ghost Arrows" with lore "&7Shoot a bunch of arrows at target!":
+					close player's inventory
+					trollPlayer({_user}, player, "arrows")
+				make gui 19 with clock named "&3Lagback" with lore "&7Make target fake lagback!":
+					close player's inventory
+					trollPlayer({_user}, player, "lagback")
+				make gui 20 with saddle named "&3Ride" with lore "&7Ride target!":
+					close player's inventory
+					trollPlayer({_user}, player, "ride")
+				make gui 21 with ice named "&3Freeze" with lore "&7Freeze target in place for 5 seconds!":
+					close player's inventory
+					trollPlayer({_user}, player, "freeze")
+				make gui 22 with diamond named "&3Fakeop" with lore "&7Fake-op target!":
+					close player's inventory
+					trollPlayer({_user}, player, "fakeop")
+				make gui 23 with barrier named "&3Fake Error" with lore "&7Kick target with a fake error message!":
+					close player's inventory
+					trollPlayer({_user}, player, "fakeerror")
+				make gui 24 with lead named "&3Take Control" with lore "&7Control target's actions for 10 seconds!":
+					close player's inventory
+					trollPlayer({_user}, player, "control")
+				make gui 25 with firework rocket named "&3Rocket" with lore "&7Make target fly into the sky!":
+					close player's inventory
+					trollPlayer({_user}, player, "rocket")
+				make gui 26 with tnt named "&3Time Bomb" with lore "&7Make target a ticking time bomb!":
+					close player's inventory
+					trollPlayer({_user}, player, "timebomb")
+				make gui 27 with glowstone dust named "&3Smite" with lore "&7Strike target with lightning!":
+					close player's inventory
+					trollPlayer({_user}, player, "smite")
+				make gui 28 with enchanted book named "&3Reverse Chat" with lore "&7Make target talk backwards!" and  "&7Click to toggle.":
+					close player's inventory
+					trollPlayer({_user}, player, "reversechat")
+				make gui 29 with fishing rod named "&3Do a 180" with lore "&7Make target turn around 180 degrees!":
+					close player's inventory
+					trollPlayer({_user}, player, "180")
+				make gui 30 with piston named "&3Rotate" with lore "&7Make target constantly rotate!" and "&7Click to toggle.":
+					close player's inventory
+					trollPlayer({_user}, player, "rotate")
+				make gui 31 with dark oak sign named "&3Fake Chat" with lore "&7Make target say something in chat!":
+					close player's inventory
+					trollPlayer({_user}, player, "fakechat")
+				make gui 32 with anvil named "&3Drop Anvil" with lore "&7Drop an anvil on target!":
+					close player's inventory
+					trollPlayer({_user}, player, "anvil")
+				make gui 33 with water bucket named "&3Slippery Hands" with lore "&7Make target drop whatever item they are holding!":
+					close player's inventory
+					trollPlayer({_user}, player, "dropitems")
+				make gui 34 with diamond ore named "&3Fake Diamonds" with lore "&7Make target see fake diamond ore around them!":
+					close player's inventory
+					trollPlayer({_user}, player, "fakediamonds")
+				make gui 35 with milk bucket named "&3Bunny Jump" with lore "&7Make target constantly jump!" and "&7Click to toggle.":
+					close player's inventory
+					trollPlayer({_user}, player, "jumping")
+			open last gui to player
+		else:
+			create a gui with virtual chest inventory with 3 rows named "&eTroll Menu":
+				make gui 0, 1, 2, 3, 5, 6, 7, 8, 18, 19, 20, 21, 22, 23, 24, 25 and 26 with gray stained glass pane named " "
+				make gui 4 with emerald named "&3Use '/troll <player>' to troll someone!"
+				make gui 9 with player head named "&dDisguise" with lore "&7Disguise as someone else!":
+					close player's inventory
+					if {troll::%player%::disguise} is not set:
+						set {troll::%player%::disguiseselector} to true
+						send "&7[&cTroll&7] &cType the name of the player you want to disguise into in chat!"
+					else:
+						retrieve skin of player into {_disguise}
+						set displayed skin of player to {_disguise} ? steve
+						set {_nametag} to player's nametag
+						replace all "%{troll::%player%::disguise}%" in {_nametag} with "%player%"
+						set player's nametag to {_nametag}
+						set player's display name to "%player%"
+						delete {troll::%player%::disguise}
+						send "&7[&eTroll&7] &cNo longer disguised!"
+				make gui 10 with splash potion of invisibility named "&dVanish" with lore "&7Be invisible to everyone on your server!":
+					close player's inventory
+					if {troll::%player%::vanish} is not set:
+						set {troll::%player%::vanish} to true
+						send "&7[&eTroll&7] &cYou are now in vanish!"
+						hide player from all players
+						while {troll::%player%::vanish} is set:
+							send action bar "&cYou are invisible to other players!" to player
+							wait 1 second
+					else:
+						delete {troll::%player%::vanish}
+						send "&7[&eTroll&7] &cYou are no longer in vanish!"
+						reveal player to all players
+				make gui 11 with bone named "&dSpawn Dog Army" with lore "&7Spawns dogs already tamed to you!":
+					close player's inventory
+					loop 10 times:
+						summon dog at player
+						set owner of last spawned dog to player
+						set name of last spawned dog to "%player%'s Dog"
+				make gui 12 with stick of knockback 32767 named "&dSuper Knockback Stick" with lore "&7Send People In To Space!":
+					close player's inventory
+					give player stick of knockback 32767 named "&dSuper Knockback Stick" with lore "&7Send People In To Space!"
+				make gui 13 with wooden sword of sharpness 32767 named "&dInsta-Kill Sword" with lore "&71 Shot The Ender Dragon!":
+					close player's inventory
+					give player wooden sword of sharpness 32767 named "&dInsta-Kill Sword" with lore "&71 Shot The Ender Dragon!"
+				make gui 14 with splash potion of harming named "&dCreative Kill Potion" with lore "&7Kill anyone, even people in creative!":
+					close player's inventory
+					Execute console command "/minecraft:give %player% minecraft:splash_potion{CustomPotionEffects:[{Id:6,Amplifier:125,Duration:1}],display:{Name:'[{""text"":""Creative Kill Potion"",""color"":""light_purple""}]'}} 1"
+				make gui 15 with splash potion of swiftness named "&dRocket Potion" with lore "&7Send anyone flying into the sky!":
+					close player's inventory
+					Execute console command "/minecraft:give %player% minecraft:splash_potion{CustomPotionEffects:[{Id:25,Amplifier:100,Duration:200}],display:{Name:'[{""text"":""Rocket Potion"",""color"":""light_purple""}]'}} 1"
+				make gui 16 with slime spawn egg named "&dGiant Slime" with lore "&7Spawn a HUGE slime!":
+					close player's inventory
+					Execute console command "/minecraft:give %player% slime_spawn_egg{EntityTag:{id:""minecraft:slime"",Size:30},display:{Name:'[{""text"":""Giant Slime"",""color"":""light_purple""}]'}}"
+				make gui 17 with zombie spawn egg named "&dGiant Zombie" with lore "&7Spawn a HUGE zombie!":
+					close player's inventory
+					Execute console command "/minecraft:give %player% zombie_spawn_egg{EntityTag:{id:""minecraft:giant""},display:{Name:'[{""text"":""Giant Zombie"",""color"":""light_purple""}]'}}"
+			open last gui to player
+
+function trollPlayer(p: player, e: player, t: text):
+	if {troll::%{_p}%::beingtrolled} is not set:
+		set {troll::%{_p}%::beingtrolled} to true
+		if {_t} is "starve":
+			send "&7[&eTroll&7] &c%{_p}% &cis now starving!" to {_e}
+			loop 10 times:
+				remove 1 from {_p}'s hunger
+				wait 10 ticks
+			delete {troll::%{_p}%::beingtrolled}
+		if {_t} is "invsee":
+			send "&7[&eTroll&7] &cNow viewing %{_p}%&c's inventory!" to {_e}
+			open {_p}'s inventory to {_e}
+			delete {troll::%{_p}%::beingtrolled}
+		if {_t} is "bury":
+			send "&7[&eTroll&7] &c%{_p}% &chas been buried!" to {_e}
+			set {_block} to block below {_p}
+			set block 2 below {_p} to air
+			set block 3 below {_p} to air
+			teleport {_p} to block 3 below {_p}
+			delete {troll::%{_p}%::beingtrolled}
+		if {_t} is "tp":
+			send "&7[&eTroll&7] &c%{_p}% &cis now teleporting!" to {_e}
+			set {_start} to location of {_p}
+			delete {troll::%{_p}%::teleports::*}
+			loop all blocks in radius 3 of {_p}:
+				if loop-block is air:
+					add location of loop-block to {troll::%{_p}%::teleports::*}
+			loop 50 times:
+				set {_loc} to random element out of {troll::%{_p}%::teleports::*}
+				teleport {_p} to {_loc}
+				wait 2 ticks
+			teleport {_p} to {_start}
+			delete {troll::%{_p}%::beingtrolled}
+		if {_t} is "spam":
+			send "&7[&eTroll&7] &c%{_p}% &cis now being spammed!" to {_e}
+			loop 100 times:
+				send "&c%random integer between 111111111 and 999999999%" to {_p}
+				wait 1 tick
+			delete {troll::%{_p}%::beingtrolled}
+		if {_t} is "ignite":
+			send "&7[&eTroll&7] &c%{_p}% &chas been set on fire!" to {_e}
+			ignite {_p}
+			delete {troll::%{_p}%::beingtrolled}
+		if {_t} is "hurt":
+			send "&7[&eTroll&7] &c%{_p}% &chas been damaged!" to {_e}
+			damage {_p} by 1
+			delete {troll::%{_p}%::beingtrolled}
+		if {_t} is "trap":
+			send "&7[&eTroll&7] &c%{_p}% &chas been trapped!" to {_e}
+			set {_block} to location of block 1 above {_p}
+			teleport {_p} to {_block}
+			if block 1 north of {_block} is air:
+				set block 1 north of {_block} to white stained glass
+			if block 1 south of {_block} is air:
+				set block 1 south of {_block} to white stained glass
+			if block 1 east of {_block} is air:
+				set block 1 east of {_block} to white stained glass
+			if block 1 west of {_block} is air:
+				set block 1 west of {_block} to white stained glass
+			if block 1 north 1 above {_block} is air:
+				set block 1 north 1 above {_block} to white stained glass
+			if block 1 south 1 above {_block} is air:
+				set block 1 south 1 above {_block} to white stained glass
+			if block 1 east 1 above {_block} is air:
+				set block 1 east 1 above {_block} to white stained glass
+			if block 1 west 1 above {_block} is air:
+				set block 1 west 1 above {_block} to white stained glass
+			if block 2 above {_block} is air:
+				set block 2 above {_block} to white stained glass
+			if block 1 below {_block} is air:
+				set block 1 below {_block} to white stained glass
+			delete {troll::%{_p}%::beingtrolled}
+		if {_t} is "creeper":
+			send "&7[&eTroll&7] &cSpawned a creeper behind %{_p}%&c!" to {_e}
+			spawn creeper at block 1 above (block 2 behind {_p})
+			delete {troll::%{_p}%::beingtrolled}
+		if {_t} is "arrows":
+			send "&7[&eTroll&7] &c%{_p}% &cis now being flooded with arrows!" to {_e}
+			loop 7 times:
+				summon arrow at block 2 above 2 north of {_p}
+				set {_arrow} to spawned entity
+				push {_arrow} south at speed 0.5
+				wait 2 tick
+				summon arrow at block 2 above 2 south of {_p}
+				set {_arrow} to spawned entity
+				push {_arrow} north at speed 0.5
+				wait 2 tick
+				summon arrow at block 2 above 2 east of {_p}
+				set {_arrow} to spawned entity
+				push {_arrow} west at speed 0.5
+				wait 2 tick
+				summon arrow at block 2 above 2 west of {_p}
+				set {_arrow} to spawned entity
+				push {_arrow} east at speed 0.5
+				wait 2 tick
+				summon arrow at block 2 above 2 north 2 east of {_p}
+				set {_arrow} to spawned entity
+				push {_arrow} southwest at speed 0.5
+				wait 2 tick
+				summon arrow at block 2 above 2 north 2 west of {_p}
+				set {_arrow} to spawned entity
+				push {_arrow} southeast at speed 0.5
+				wait 2 tick
+				summon arrow at block 2 above 2 south 2 east of {_p}
+				set {_arrow} to spawned entity
+				push {_arrow} northwest at speed 0.5
+				wait 2 tick
+				summon arrow at block 2 above 2 south 2 west of {_p}
+				set {_arrow} to spawned entity
+				push {_arrow} northeast at speed 0.5
+				wait 2 tick
+			kill all arrows in radius 10 of {_p}
+			delete {troll::%{_p}%::beingtrolled}
+		if {_t} is "lagback":
+			send "&7[&eTroll&7] &c%{_p}% &chas lagged back!" to {_e}
+			teleport {_p} to {troll::%{_p}%::lastloc5}
+			delete {troll::%{_p}%::beingtrolled}
+		if {_t} is "ride":
+			send "&7[&eTroll&7] &cNow riding %{_p}%&c!" to {_e}
+			make {_e} ride {_p}
+			delete {troll::%{_p}%::beingtrolled}
+		if {_t} is "freeze":
+			send "&7[&eTroll&7] &c%{_p}% &cis now frozen in place!" to {_e}
+			set {troll::%{_p}%::frozen} to true
+			set {troll::%{_p}%::walkspeed} to {_p}'s walk speed
+			set {troll::%{_p}%::flyspeed} to {_p}'s fly speed
+			set {_p}'s walk speed to 0
+			set {_p}'s fly speed to 0
+			wait 5 seconds
+			set {_online} to "%players%"
+			{_online} contains "%{_p}%"
+			set {_p}'s walk speed to {troll::%{_p}%::walkspeed}
+			set {_p}'s fly speed to {troll::%{_p}%::flyspeed}
+			delete {troll::%{_p}%::walkspeed}
+			delete {troll::%{_p}%::flyspeed}
+			delete {troll::%{_p}%::frozen}
+			delete {troll::%{_p}%::beingtrolled}
+		if {_t} is "fakeop":
+			send "&7[&eTroll&7] &c%{_p}% &cis now fake-opped!" to {_e}
+			send "&7&o[Server: Made %{_p}% &7&oa server operator]" to {_p}
+			send "&7&o[Server: Made %{_p}% &7&oa server operator]" to {_e}
+			delete {troll::%{_p}%::beingtrolled}
+		if {_t} is "fakeerror":
+			send "&7[&eTroll&7] &c%{_p}% &chas been kicked with a fake error message!" to {_e}
+			set {_random} to random integer between 1 and 5
+			if {_random} is 1:
+				kick {_p} due to "Internal Exception: java.io.IOException: An existing connection was forcibly closed by the remote host"
+			if {_random} is 2:
+				kick {_p} due to "Timed Out"
+			if {_random} is 3:
+				kick {_p} due to "Internal Exception: io.netty.handler.codec.DecoderException: java.io.IOException: Bad packet id"
+			if {_random} is 4:
+				kick {_p} due to "Invalid Session"
+			if {_random} is 5:
+				kick {_p} due to "Internal Exception: com.google.common.util.concurrent.UncheckedExecutionException: java.lang.IllegalStateException: Recipe (net.minecraft.item.crafting.ShapedRecipes@7c840fe3) produces unregistered item"
+			delete {troll::%{_p}%::beingtrolled}
+		if {_t} is "control":
+			send "&7[&eTroll&7] &cNow controlling %{_p}% &cfor 10 seconds!" to {_e}
+			trollcontrolPlayer({_p}, {_e})
+		if {_t} is "rocket":
+			send "&7[&eTroll&7] &c%{_p}% &cis now rocketing into the sky!" to {_e}
+			apply levitation of tier 50 without particles to {_p} for 5 seconds
+			loop 25 times:
+				loop 10 times:
+					play firework's spark with speed 0.1 0.1 below {_p} to all players
+				play sound "entity.firework_rocket.launch" at {_p} for all players
+				wait 4 ticks
+			delete {troll::%{_p}%::beingtrolled}
+		if {_t} is "timebomb":
+			send "&7[&eTroll&7] &c%{_p}% &cis now a ticking time bomb!" to {_e}
+			set {_num} to 10
+			loop 10 times:
+				play sound "block.stone_button.click_on" at {_p} for all players
+				apply glowing of tier 1 without particles to {_p} for 0.5 seconds
+				send title "&c%{_num}%" to {_p}
+				subtract 1 from {_num}
+				wait 1 second
+			create safe explosion of force 0 at {_p}
+			play huge explosion at {_p} to all players
+			kill {_p}
+			delete {troll::%{_p}%::beingtrolled}
+		if {_t} is "smite":
+			send "&7[&eTroll&7] &c%{_p}% &chas been struck with lightning!" to {_e}
+			strike lightning at {_p}
+			delete {troll::%{_p}%::beingtrolled}
+		if {_t} is "reversechat":
+			if {troll::%{_p}%::reversechat} is not set:
+				send "&7[&eTroll&7] &c%{_p}% &cwill now speak backwards!" to {_e}
+				set {troll::%{_p}%::reversechat} to true
+			else:
+				send "&7[&eTroll&7] &c%{_p}% &cwill no longer speak backwards!" to {_e}
+				delete {troll::%{_p}%::reversechat}
+			delete {troll::%{_p}%::beingtrolled}
+		if {_t} is "180":
+			send "&7[&eTroll&7] &c%{_p}% &cdid a 180!" to {_e}
+			trollRotatePlayer({_p}, 180)
+			delete {troll::%{_p}%::beingtrolled}
+		if {_t} is "rotate":
+			if {troll::%{_p}%::rotating} is not set:
+				send "&7[&eTroll&7] &c%{_p}% &cis now rotating!" to {_e}
+				set {troll::%{_p}%::rotating} to true
+			else:
+				send "&7[&eTroll&7] &c%{_p}% &cis no longer rotating!" to {_e}
+				delete {troll::%{_p}%::rotating}
+			delete {troll::%{_p}%::beingtrolled}
+			while {troll::%{_p}%::rotating} is set:
+				trollRotatePlayer({_p}, 15)
+				wait {@RotateTrollSpeed} ticks
+		if {_t} is "fakechat":
+			send "&7[&eTroll&7] &cType the message you want %{_p}% &cto say in chat!" to {_e}
+			set {troll::%{_e}%::chattingas} to "%{_p}%"
+			delete {troll::%{_p}%::beingtrolled}
+		if {_t} is "anvil":
+			send "&7[&eTroll&7] &cNow dropping an anvil on %{_p}%&c!" to {_e}
+			if block 3 above {_p} is air:
+				set block 3 above {_p} to damaged anvil
+			delete {troll::%{_p}%::beingtrolled}
+		if {_t} is "dropitems":
+			send "&7[&eTroll&7] &c%{_p}% &chas dropped their held item!" to {_e}
+			if {_p}'s tool is not air:
+				drop {_p}'s tool at {_p}
+				remove {_p}'s tool from {_p}
+			delete {troll::%{_p}%::beingtrolled}
+		if {_t} is "fakediamonds":
+			send "&7[&eTroll&7] &c%{_p}% &cnow sees fake diamond ores around them!" to {_e}
+			loop all blocks in radius 3 of {_p}:
+				if loop-block is not air:
+					if loop-block is solid:
+						make {_p} see loop-block as diamond ore
+						make {_e} see loop-block as diamond ore
+			delete {troll::%{_p}%::beingtrolled}
+		if {_t} is "jumping":
+			if {troll::%{_p}%::jumping} is not set:
+				send "&7[&eTroll&7] &c%{_p}% &cis now jumping!" to {_e}
+				set {troll::%{_p}%::jumping} to true
+			else:
+				send "&7[&eTroll&7] &c%{_p}% &cis no longer jumping!" to {_e}
+				delete {troll::%{_p}%::jumping}
+			delete {troll::%{_p}%::beingtrolled}
+			while {troll::%{_p}%::jumping} is set:
+				if block 0.5 below {_p} is not air:
+					push {_p} up at speed 0.5
+				wait 1 second
+	else:
+		send "&7[&eTroll&7] &c%{_p}% &cis currently already being trolled!" to {_e}
+
+
+on chat:
+	if {troll::%player%::chattingas} is set:
+		cancel event
+		send "&7[&eTroll&7] &cNow making %{troll::%player%::chattingas}% &csay your message!" to player
+		set {_p} to "%{troll::%player%::chattingas}%" parsed as player
+		make {_p} say message
+		delete {troll::%player%::chattingas}
+		stop
+	if {troll::%player%::reversechat} is set:
+		set message to trollreverseText(message)
+
+on chat:
+	if {troll::%player%::disguiseselector} is set:
+		cancel event
+		delete {troll::%player%::disguiseselector}
+		set {troll::%player%::disguise} to message
+		retrieve skin of "%{troll::%player%::disguise}%" parsed as offline player into {_disguise}
+		set displayed skin of player to {_disguise} ? steve
+		set {_nametag} to player's nametag
+		replace all "%player%" in {_nametag} with "%{troll::%player%::disguise}%"
+		set player's nametag to {_nametag}
+		set player's display name to "%{troll::%player%::disguise}%"
+		send "&7[&eTroll&7] &cNow disguised as %{troll::%player%::disguise}%&c!" to player
+		send "&7[&eTroll&7] &cWARNING: Disguises require tablisknu and protocollib to function. Not installing tablistknu and protocollib will not affect the rest of the skript."
+		while {troll::%player%::disguise} is set:
+			send action bar "&cYou are disguised as %{troll::%player%::disguise}% &cto other players!" to player
+			wait 1 second
+
+on join:
+	if {troll::%player%::vanish} is set:
+		reveal player to all players
+		delete {troll::%player%::vanish}
+	if {troll::%player%::walkspeed} is set:
+		set player's walk speed to {troll::%player%::walkspeed}
+		delete {troll::%player%::walkspeed}
+	if {troll::%player%::flyspeed} is set:
+		set player's fly speed to {troll::%player%::flyspeed}
+		delete {troll::%player%::flyspeed}
+	wait 10 ticks
+	delete {troll::%player%::*}
+	while player is online:
+		set {troll::%player%::lastloc5} to {troll::%player%::lastloc4}
+		set {troll::%player%::lastloc4} to {troll::%player%::lastloc3}
+		set {troll::%player%::lastloc3} to {troll::%player%::lastloc2}
+		set {troll::%player%::lastloc2} to {troll::%player%::lastloc1}
+		set {troll::%player%::lastloc1} to location of block at player
+		wait 1 second
+
+on jump:
+	if {troll::%player%::frozen} is set:
+		cancel event
+
+function trollreverseText(t: text) :: string:
+	set {_text::*} to {_t} split at ""
+	set {_num} to size of {_text::*}
+	loop {_num} times:
+		add {_text::%{_num}%} to {_message::*}
+		remove 1 from {_num}
+	set {_message} to "%{_message::*}%"
+	replace all ", " and " and " in {_message} with ""
+	return {_message}
+
+function trollcontrolPlayer(p: player, c: player):
+	set {_loc} to location of {_c}
+	teleport {_c} to {_p}
+	apply invisibility of tier 1 without particles to {_c} for 10 seconds
+	loop 200 times:
+		teleport {_p} to {_c}
+		wait 1 tick
+	teleport {_c} to {_loc}
+	delete {troll::%{_p}%::beingtrolled}
+
+function trollRotatePlayer(p: player, e: integer):
+	set {_loc} to {_p}'s location
+	set {_yaw} to "%{_p}'s yaw%" parsed as number
+	add {_e} to {_yaw}
+	if {_yaw} > 360:
+		set {_yaw} to {_yaw} - 360
+	set yaw of {_loc} to {_yaw}
+	teleport {_p} to {_loc}
