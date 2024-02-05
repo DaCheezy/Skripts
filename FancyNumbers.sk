@@ -35,4 +35,4 @@ function GlobalNumbers(n: int) :: text:
 
 command sendfancy <int>:
     trigger:
-        send "%GlobalNumbers(arg-1)%"
+        send "%GlobalNumbers(arg)%"
