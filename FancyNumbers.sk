@@ -28,3 +28,10 @@ function GlobalNumbers(n: int) :: text:
         return "&cuhh only &a①-&b⑳"
     else:
         return {global.numbers.%{_n}%}
+
+
+# Example #
+
+command sendfancy <int>:
+    trigger:
+        send "%GlobalNumbers(arg-1)%"
