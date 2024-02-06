@@ -1,0 +1,70 @@
+#--Basic Backpack Skript (Idea Thingy)--#
+
+options:
+    pricegold: 50
+    priceiron: 10
+
+
+function clearBackpack(p: player):
+    set {_iron::%{_p}%} to {backpack::iron::%{_p}'s uuid%}
+    set {_gold::%{_p}%} to {backpack::gold::%{_p}'s uuid%}
+    set {backpack::iron::%{_p}'s uuid%} to 0
+    set {backpack::gold::%{_p}'s uuid%} to 0
+    add ({_iron::%{_p}%} * {@priceiron}) to {balance::%{_p}'s uuid%}
+    add ({_gold::%{_p}%} * {@pricegold}) to {balance::%{_p}'s uuid%}
+    set {totalamount::%{_p}'s uuid%} to ({_gold::%{_p}%} + {_iron::%{_p}%})
+    set {totalmoney::%{_p}'s uuid%} to ({_gold::%{_p}%} * {@pricegold} + {_iron::%{_p}%} * {@priceiron})
+    clear {_iron::%{_p}%}
+    clear {_gold::%{_p}%}
+
+on join:
+    if {backpack::gold::%player's uuid%} is not set:
+        set {backpack::gold::%player's uuid%} to 0 
+    if {backpack::iron::%player's uuid%} is not set:
+        set {backpack::iron::%player's uuid%} to 0
+    if {balance::%player's uuid%} is not set: 
+        set {balance::%player's uuid%} to 0
+
+
+on mine of gold ore or iron ore:
+    if name of player's tool is "&aBackpack Pickaxe":
+        if event-block is iron ore: 
+            clear drops
+            add 1 to {backpack::iron::%player's uuid%}
+            send "&a+1 &bIron Ore" to player
+        else if event-block is gold ore: 
+            clear drops
+            add 1 to {backpack::gold::%player's uuid%}
+            send "&a+1 &bGold Ore" to player
+
+
+command givepick:
+    trigger:
+        give player 1 diamond pickaxe named "&aBackpack Pickaxe"
+
+command bp:
+    trigger:
+        OpenMainGui(player)
+
+
+function OpenMainGui(p: player):
+    set {_gui} to chest inventory with 3 rows named "BackPack"
+    set slot integers between 0 and 26 of {_gui} to gray glass pane named "&7"
+    set slot 12 of {_gui} to iron ore named "&cIron Ore" 
+    set slot 14 of {_gui} to gold ore named "&cGold Ore"
+    set slot 22 of {_gui} to emerald block named "&cSell all" with lore "&fClick to sell your backpack"
+    open {_gui} to {_p}
+
+on inventory click:
+    if name of event-inventory is "BackPack":
+        cancel event
+        if event-slot is 22:
+            clearBackpack(player)
+            close player's inventory
+            send "&bsold %{totalamount::%player's uuid%}% Items! for %{totalmoney::%player's uuid%}%"
+
+command sendinfo:
+    trigger:
+        send "&c%{backpack::iron::%player's uuid%}%" to player
+        send "&c%{backpack::gold::%player's uuid%}%" to player
+        send "&c%{balance::%player's uuid%}%" to player
