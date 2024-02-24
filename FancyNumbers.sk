@@ -24,9 +24,7 @@ on load:
     set {global.numbers.20} to "⑳"
 
 function GlobalNumbers(n: int) :: text:
-    if {_n} < -1:
-        return "&cuhh only &a⓪-&b⑳"
-    else if {_n} > 20:
+    if {_n} > 20 and < 0:
         return "&cuhh only &a⓪-&b⑳"
     else:
         return {global.numbers.%{_n}%}
